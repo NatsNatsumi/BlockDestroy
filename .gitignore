@@ -1,0 +1,12 @@
+
+.vscode
+Assembly-CSharp.csproj
+# Assets
+block.sln
+Logs/
+Packages/
+ProjectSettings/
+Temp/
+UserSettings/
+
+Library/
