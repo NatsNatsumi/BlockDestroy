@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Block[] blocks;
     public GameObject gameOverUI;
     public GameObject gameClearUI;
+    
     private bool isGameClear = false;
     void Start()
     {        
