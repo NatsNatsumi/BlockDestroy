@@ -24,5 +24,6 @@ public class GameStart : MonoBehaviour
     {
         Debug.Log("スタート");
         SceneManager.LoadScene("game");
+        Time.timeScale = 1f;//追加250406
     }
 }

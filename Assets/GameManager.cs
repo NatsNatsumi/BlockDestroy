@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("ゲームクリア");
                 gameClearUI.SetActive(true);
                 isGameClear = true;
+                Time.timeScale =0f;//追加250406
             }
         }
         
@@ -46,11 +47,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("ゲームオーバー");
         gameOverUI.SetActive(true);
+        Time.timeScale =0f;//追加250406
     }
 
     public void GameRetry()
     {
         SceneManager.LoadScene("game");
+        Time.timeScale =1f;//追加250406
     }
 
 }
