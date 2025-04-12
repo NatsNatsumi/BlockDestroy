@@ -22,8 +22,8 @@ public class GameStart : MonoBehaviour
     //追加
     public void GameStart_()
     {
-        Debug.Log("スタート");
-        SceneManager.LoadScene("game");
-        Time.timeScale = 1f;//追加250406
+        // Debug.Log("スタート");
+        // SceneManager.LoadScene("game");
+        // Time.timeScale = 1f;//追加250406
     }
 }
