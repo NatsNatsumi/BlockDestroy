@@ -4,30 +4,64 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float speed = 1.0f;
+    public float speed = 5.0f;
     private Rigidbody myRigid;
     public GameManager myManager;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [System.Obsolete]
     void Start()
     {
-        myRigid = this.GetComponent<Rigidbody>();
-        myRigid.AddForce((transform.forward + transform.right) * speed, ForceMode.VelocityChange);
+        myRigid = GetComponent<Rigidbody>();
+
+        // 初速を与える（正規化して一定のスピードに）
+        Vector3 dir = (transform.forward * 0.8f + transform.right * 0.6f).normalized;
+
+        myRigid.velocity = dir * speed;
+
+        // dragを0にして減速しないように
+        myRigid.drag = 0f;
+        myRigid.angularDrag = 0f;
     }
 
-    // Update is called once per frame
-    void Update()
+    [System.Obsolete]
+    void FixedUpdate()
     {
-        
+        Vector3 vel = myRigid.velocity;
+
+        // ハマり防止（縦横完全にはまったとき）
+        if (Mathf.Abs(vel.x) < 0.1f && Mathf.Abs(vel.z) > 0.9f)
+        {
+            vel.x = 0.3f * Mathf.Sign(Random.Range(-1f, 1f));
+        }
+        else if (Mathf.Abs(vel.z) < 0.1f && Mathf.Abs(vel.x) > 0.9f)
+        {
+            vel.z = 0.3f * Mathf.Sign(Random.Range(-1f, 1f));
+        }
+
+        // 💥 Z軸方向が浅すぎたらブースト（上下方向強調）
+        float zLimit = 0.4f;
+        if (Mathf.Abs(vel.z) < zLimit)
+        {
+            vel.z = zLimit * Mathf.Sign(vel.z != 0 ? vel.z : Random.Range(-1f, 1f));
+        }
+
+        // 💥 X軸方向も浅すぎたらブースト（左右方向強調）
+        float xLimit = 0.6f;
+        if (Mathf.Abs(vel.x) < xLimit)
+        {
+            vel.x = xLimit * Mathf.Sign(vel.x != 0 ? vel.x : Random.Range(-1f, 1f));
+        }
+
+        // 再正規化して速度統一
+        myRigid.velocity = vel.normalized * speed;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if( collision.gameObject.tag == "Finish")
+        if (collision.gameObject.tag == "Finish")
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             myManager.GameOver();
         }
     }
-
 }
