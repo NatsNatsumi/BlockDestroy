@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = 8.0f;
     private Rigidbody myRigid;
     public GameManager myManager;
 
     [System.Obsolete]
     void Start()
-    {
-        myRigid = GetComponent<Rigidbody>();
+{
+    myRigid = GetComponent<Rigidbody>();
 
-        // 初速を与える（正規化して一定のスピードに）
-        Vector3 dir = (transform.forward * 0.8f + transform.right * 0.6f).normalized;
+    // ランダムなX方向（左右に振る）を生成（例：-0.5〜0.5）
+    float randomX = Random.Range(-0.3f, 0.7f);
 
-        myRigid.velocity = dir * speed;
+    // Z方向は前方、X方向はランダムでブレさせる
+    Vector3 dir = (transform.forward * 0.8f + transform.right * randomX).normalized;
 
-        // dragを0にして減速しないように
-        myRigid.drag = 0f;
-        myRigid.angularDrag = 0f;
-    }
+    // 一定のスピードで飛ばす
+    myRigid.velocity = dir * speed;
+
+    // dragで減速しないように
+    myRigid.drag = 0f;
+    myRigid.angularDrag = 0f;
+}
+
 
     [System.Obsolete]
     void FixedUpdate()
