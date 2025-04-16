@@ -719,6 +719,8 @@ GameObject:
   - component: {fileID: 236783822}
   - component: {fileID: 236783821}
   - component: {fileID: 236783825}
+  - component: {fileID: 236783827}
+  - component: {fileID: 236783826}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -828,6 +830,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &236783826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236783820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890d0cfe5c11fe049926e41e9e5eec8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushDistance: 1
+  pushDuration: 0.2
+--- !u!54 &236783827
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236783820}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0
 --- !u!1 &322698560
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +887,7 @@ GameObject:
   - component: {fileID: 322698566}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -964,7 +1007,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &322698566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,7 +1020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b362b9b86017ebf4ab1a886ae762b8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 8
   myManager: {fileID: 1390341582}
 --- !u!4 &348335914 stripped
 Transform:
