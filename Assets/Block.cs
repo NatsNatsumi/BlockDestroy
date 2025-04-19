@@ -21,6 +21,31 @@ public class Block : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         scoreText.GetComponent<ScoreManager>().score = scoreText.GetComponent<ScoreManager>().score + 300;
-        Destroy(this.gameObject);
+        DestroyBlock();
+    }
+
+    public void DestroyBlock()//250419追加_DestroyBlock
+    {
+        StartCoroutine(DestroyEffect());
+    }
+
+    IEnumerator DestroyEffect()//250419追加_DestroyBlock
+    {
+        // ちょっと縮ませる
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * 0.1f;
+
+        float duration = 0.1f;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        // 最後にオブジェクト削除
+        Destroy(gameObject);
     }
 }
