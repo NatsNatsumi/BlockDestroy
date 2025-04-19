@@ -5,6 +5,8 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     private GameObject scoreText;
+    public GameObject breakEffectPrefab;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,6 +45,12 @@ public class Block : MonoBehaviour
             transform.localScale = Vector3.Lerp(originalScale, targetScale, time / duration);
             time += Time.deltaTime;
             yield return null;
+        }
+
+        // パーティクル生成！
+        if (breakEffectPrefab != null)
+        {
+            Instantiate(breakEffectPrefab, transform.position, Quaternion.identity);
         }
 
         // 最後にオブジェクト削除
